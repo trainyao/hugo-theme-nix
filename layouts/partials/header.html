@@ -1,27 +1,27 @@
 <header>
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse font-header">
+<nav id="navbar" class="navbar navbar-default navbar-fixed-top navbar-inverse font-header">
+    <div class="container-fluid">
+        <span class="green-terminal">{{ .Site.Params.HeaderUsername }}@{{ .Site.Params.HeaderHostname }} ~ $</span><span class="content-terminal"> /greeting.sh && ls /</span>
+    </div>
+    <div class="container-fluid">
+        <span class="content-terminal">Hello, I'm trainyao and welcome to my blog, here's the navigation:</span>
+    </div>
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-      <a class="navbar-brand" id="green-terminal" href='{{ "/" | absLangURL }}'>
+      <!--<a class="navbar-brand" id="green-terminal" href='{{ "/" | absLangURL }}'>
         {{ .Site.Params.HeaderUsername }}@{{ .Site.Params.HeaderHostname }} ~ $
-      </a>
+      </a>-->
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-left content-terminal">
 				<li>
-					<a href='{{ "/" | absLangURL }}'>/home/{{ .Site.Params.HeaderUsername }}</a>
+					<a href='{{ "/" | absLangURL }}'>/home</a>
         </li>
         {{ if .IsTranslated }}
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" role="button" title="{{ .Language.LanguageName }}">
+            <a class="dropdown-toggle" role="button" title="{{ .Language.LanguageName }}">
               LANG={{ .Language.Lang }}
               <span class="caret"></span>
             </a>
@@ -40,22 +40,28 @@
 				{{ $name := lower .Name }}
 				<li class="dropdown">
                     {{ if .HasChildren }}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ .Name }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">/{{ .Name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {{ range .Children }}
                     		<li>
-                    		<a href="{{ .URL | absLangURL }}">~/{{ lower .Name }}</a>
+                    		<a href="{{ .URL | absLangURL }}">/{{ lower .Name }}</a>
 				    		</li>
                 		{{ end }}
             		</ul>
             		{{ else }}
-            		<a href="{{ .URL | absLangURL }}">~/{{ lower .Name }}</a>
+            		<a href="{{ .URL | absLangURL }}">/{{ lower .Name }}</a>
             		{{ end  }}
         		</li>
         		{{ end }}
 
+                <li><span class="green-terminal" title="#!/bin/bash 
+
+echo &quot;Hello, I'm &quot;$(whoami)&quot; and welcome to my blog, here's the navigation:&quot;">/greeting.sh</li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <span class="green-terminal">{{ .Site.Params.HeaderUsername }}@{{ .Site.Params.HeaderHostname }} ~ $</span><span class="cursor"></span>
+    </div>
 </nav>
 </header>

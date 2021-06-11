@@ -22,15 +22,23 @@ img {
   	min-height: 100vh;
   	flex-direction: column;
 	justify-content: space-between;
-	padding-top: 70px;
+	padding-top: 100px;
 }
 
 #green-terminal {
 	color: #00ff00;
 }
+.green-terminal {
+	color: #00ff00;
+    font-size:15px;
+}
+.content-terminal {
+	color: #feffff;
+    font-size:15px;
+}
 
 .font-header {
-	font-family: 'Inconsolata', monospace;
+	font-family: 'Monaco', 'Inconsolata', monospace;
 }
 
 .font-paragraph {
@@ -52,6 +60,7 @@ h1,h2,h3,h4,h5,h6 {
 #user-name {
 	font-size: 5em;
 	text-transform: uppercase;
+    padding-top: 150px;
 }
 
 .user-description {
@@ -152,4 +161,112 @@ div p {
 
 td {
 	margin: 0 20px 0 20px;
+}
+
+.navbar-nav>li>a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#navbar ul>li>a {
+    padding-left: 0px;
+}
+
+#navbar {
+    padding-bottom: 5px;
+    border-color: white;
+    border-bottom-width: 2px;
+}
+
+#container {
+    padding-top: 280px;
+
+    background-color: black;
+    color: #feffff !important;
+    display: block;
+	font-family: 'Monaco', 'Inconsolata', monospace;
+}
+
+.custom-wrapper {
+    margin: 0 auto 0 0;
+}
+
+.cursor {
+    line-height: 5px;
+}
+
+@keyframes blink {
+    0% {color: black;}
+    8% {color: white;}
+    80% {color: white;}
+    100% {color: black;}
+}
+
+.cursor::after {
+    animation: blink 1.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    -webkit-animation: blink 1.2s; /* Safari 与 Chrome */
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    content: " ▌";
+    color: white;
+    font-size: 20px;
+}
+
+code {
+    color: #00ff00;
+    background-color: black;
+    border-radius: unset;
+}
+
+
+.toc .nav>li>a {
+    padding: 0px;
+    color: #9d9d9d;
+}
+
+.toc .nav>li>a {
+    padding: 0px;
+    color: #9d9d9d;
+}
+.toc .nav>li>a:hover {
+	color: #feffff;
+}
+.toc .nav>li>a:hover, .toc .nav>li>a:focus {
+	background-color: unset;
+}
+
+.toc {
+    position: fixed;
+    top: 124px;
+    left: 0px;
+    width: 100%;
+    height: 150px;
+    overflow-y: scroll;
+    border-bottom-width: 2px;
+    border-bottom-color: white;
+    border-bottom-style: solid;
+    background-color: black;
+    z-index: 1000;
+}
+
+@media (min-width: 1200px) {
+  #container {
+    padding-top: 140px;
+  }
+
+  .toc {
+    overflow-y: unset;
+    position: fixed;
+    left: unset;
+    right: 0px;
+    width: 400px;
+    height: 100%;
+    border-left-width: 2px;
+    border-left-color: rgba(255,255,255,0.4);
+    border-left-style: solid;
+    background-color: rgba(0,0,0,0.4);
+  }
 }

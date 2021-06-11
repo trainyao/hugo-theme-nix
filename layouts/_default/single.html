@@ -9,8 +9,11 @@
 
     <body>
         {{ partial "header.html" . }}
-        <div class="flex-wrapper">
-            <div class="container wrapper">
+        <div id="container" class="flex-wrapper">
+    <div class="container-fluid">
+        <span class="green-terminal">{{ .Site.Params.HeaderUsername }}@{{ .Site.Params.HeaderHostname }} ~ $</span> cat /{{ replace .File ".md" "" }}.blog
+    </div>
+            <div class="container wrapper custom-wrapper">
                 <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
                 <span class="post-date">{{ .Date.Format "2006-01-02 " }}</span>
                 <div class="post-content">
@@ -23,6 +26,10 @@
                 </div>
                 {{ end }}
             </div>
+    <div class="container-fluid">
+        <span class="green-terminal">{{ .Site.Params.HeaderUsername }}@{{ .Site.Params.HeaderHostname }} ~ $</span><span class="cursor"></span>
+    </div>
+            {{ partial "toc.html" . }}
             {{ partial "footer.html" . }}
         </div>
     </body>

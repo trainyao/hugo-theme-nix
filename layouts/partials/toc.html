@@ -1,0 +1,54 @@
+<!-- toc.html -->
+<!-- ignore empty links with + -->
+{{ $headers := findRE "<h[1-4].*?>(.|\n])+?</h[1-4]>" .Content }}
+<!-- at least one header to link to -->
+{{ if ge (len $headers) 1 }}
+{{ $h1_n := len (findRE "(.|\n])+?" .Content) }}
+{{ $re := (cond (eq $h1_n 0) "<h[2-4]" "<h[1-4]") }}
+{{ $renum := (cond (eq $h1_n 0) "[2-4]" "[1-4]") }}
+
+<!--Scrollspy-->
+<div class="toc">
+    <div class="container-fluid">
+        <span class="green-terminal">{{ .Site.Params.HeaderUsername }}@{{ .Site.Params.HeaderHostname }} ~ $</span><span class="content-terminal"> tree /{{ (replace .File ".md" "") }}/catalog</span>
+    </div>
+    <div class="container-fluid">
+        <span class="content-terminal"> catalog</span>
+        <div id="page-scrollspy" class="toc-nav">
+        {{ range $headers }}
+        {{ $header := . }}
+            {{ range first 1 (findRE $re $header 1) }}
+                {{ range findRE $renum . 1 }}
+                {{ $next_heading := (cond (eq $h1_n 0) (sub (int .) 1 ) ((int . )) ) }}
+                    {{ range seq $next_heading }}
+                    <ul class="nav">
+                    {{end}}
+                    {{ $anchorId := (replaceRE ".* id=\"(.*?)\".*" "$1" $header ) }}
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#{{ $anchorId }}">
+                                <!-- 控制模拟 tree 样式 -->
+                                {{if ne $next_heading 1}}│{{range seq (sub $next_heading 1) }}&nbsp;&nbsp;&nbsp;&nbsp;{{end}}├{{else}}├{{end}}── {{ $header | plainify | htmlUnescape }}
+                            </a>
+                        </li>
+                    <!-- close list -->
+                    {{ range seq $next_heading }}
+                    </ul>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        </div>
+    </div>
+    <div class="container-fluid">
+        <span class="green-terminal">{{ .Site.Params.HeaderUsername }}@{{ .Site.Params.HeaderHostname }} ~ $</span><span class="cursor"></span>
+    </div>
+
+    <!-- <div class="page-header"><strong>- CATALOG -</strong></div> -->
+
+</div>
+<script>
+    $('body').scrollspy({ target: "#page-scrollspy", offset: navbarHeight+5 });
+</script>
+<!--Scrollspy-->
+
+{{ end }}
